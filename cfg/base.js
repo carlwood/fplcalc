@@ -39,7 +39,7 @@ module.exports = {
       'react/lib/ReactMount': 'react-dom/lib/ReactMount'
     }
   },
-   module: {
+  module: {
         loaders: [
             // ...
             {
@@ -47,5 +47,5 @@ module.exports = {
                 loaders: ['style', 'css', 'sass']
             }
         ]
-    }
+  }
 };
