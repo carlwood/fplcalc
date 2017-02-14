@@ -1,6 +1,14 @@
 /* Base Application Styles */
+
+$brand1: #503f5a;
+$brand2: #c6711c;
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background: #503f5a;
+    background: $brand1;
     color: #e5e5e5;
     font-size: 18px;
     font-family: 'Georgia', serif;
@@ -13,18 +21,56 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 60rem;
     padding: 0 1.5rem;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mast-heading {
     color: #fff;
     font-size: 3rem;
+    text-align: center;
 }
 
 .card {
     background: #fff;
     border-radius: 1rem;
     color: #2e2e2e;
+    flex: 1;
     padding: 1.5rem;
+    max-width: 30rem;
+}
+
+.btn {
+    border: none;
+    display: inline-block;
+    font-size: 1rem;
+    background: $brand2;
+    color: #fff;
+    padding: 0.5rem 1rem; 
+}
+
+// Form
+
+form {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    width: 100%;
 }
