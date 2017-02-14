@@ -1,1 +1,5 @@
 # fplcalc
+
+## Running
+
+```npm start```
