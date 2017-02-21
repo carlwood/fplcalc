@@ -9,8 +9,8 @@ class AppComponent extends React.Component {
         return (
             <div className="index">
                 <div className="container">
-                    <h1 className="mast-heading">FPL Calc</h1>
-                    <div className="card-container">
+                    <h1 className="site-logo">FPL Calc</h1>
+                    <div>
                         <Player />
                     </div>
                 </div>
