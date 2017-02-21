@@ -11,7 +11,9 @@ class Player extends React.Component {
 class PlayerIntro extends React.Component {
     render() {
         return (
-            <p>Add your player and calculate their potential points by completing this form.</p>
+            <div className="form-intro"> 
+                <p>Add your player and calculate their potential points by completing this form.</p>
+            </div>
         )
     }
 }
@@ -67,7 +69,10 @@ class PlayerForm extends React.Component {
                     </form>
                 </div>
                 <div className="player-result">
-                    <PlayerResult name={this.state.name} goals={this.state.goals} assists={this.state.assists}/>
+                    <PlayerResult 
+                        name={this.state.name} 
+                        goals={this.state.goals} 
+                        assists={this.state.assists}/>
                 </div>
             </div>
         );
