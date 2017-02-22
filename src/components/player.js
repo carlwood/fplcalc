@@ -12,7 +12,7 @@ class PlayerIntro extends React.Component {
     render() {
         return (
             <div className="form-intro"> 
-                <p>Add your player and calculate their potential points by completing this form.</p>
+                <p>Calculate your player's potential points by completing this form.</p>
             </div>
         )
     }
@@ -59,11 +59,11 @@ class PlayerForm extends React.Component {
                         </div>
                         <div className="form-group">
                             <label className="form-label">Goals</label>
-                            <input className="form-input" type="text" onChange={this.handleGoalsChange} />
+                            <input className="form-input" type="number" onChange={this.handleGoalsChange} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Assists</label>
-                            <input className="form-input" type="text" onChange={this.handleAssistsChange} />
+                            <input className="form-input" type="number" onChange={this.handleAssistsChange} />
                         </div>
                         <input className="btn" type="submit" value="Submit" />
                     </form>
@@ -80,12 +80,20 @@ class PlayerForm extends React.Component {
 }
 
 class PlayerResult extends React.Component {
+
+    renderGoalPoints() {
+        return (
+            <span>{this.props.goals * 5}</span>
+        )
+    }
+
     render() {
+
         return (
             <div>
                 <div className="player-name">{this.props.name}</div>
                 <div><b>78</b> minutes played (2)</div>
-                <div><b>{this.props.goals}</b> goals (10)</div>
+                <div><b>{this.props.goals}</b> goals ({this.renderGoalPoints()})</div>
                 <div><b>{this.props.assists}</b> assist (5)</div>
                 <span className="player-points">17</span>
                 <span className="player-points-label">points</span>
