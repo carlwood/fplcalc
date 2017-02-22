@@ -20,40 +20,19 @@ class PlayerIntro extends React.Component {
 
 class PlayerForm extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            name: null,
+            name: '',
             mins: 0,
-            goals: null,
-            assists: null,
+            goals: '',
+            assists: '',
             position: 'gk'
-        };
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handlePositionChange = this.handlePositionChange.bind(this);
-        this.handleMinsChange = this.handleMinsChange.bind(this);
-        this.handleGoalsChange = this.handleGoalsChange.bind(this);
-        this.handleAssistsChange = this.handleAssistsChange.bind(this);
+        }
     }
 
-    handleNameChange(event) {
-        this.setState({name: event.target.value});
-    }
-
-    handlePositionChange(event) {
-        this.setState({position: event.target.value});
-    }
-
-    handleMinsChange(event) {
-        this.setState({mins: event.target.value});
-    }
-
-    handleGoalsChange(event) {
-        this.setState({goals: event.target.value});
-    }
-
-    handleAssistsChange(event) {
-        this.setState({assists: event.target.value});
+    setValue(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
 
     render() {
@@ -64,11 +43,11 @@ class PlayerForm extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label className="form-label">Player name</label>
-                            <input className="form-input" type="text" onChange={this.handleNameChange} />
+                            <input className="form-input" type="text" name="name" onChange={this.setValue.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Position</label>
-                            <select className="form-input" onChange={this.handlePositionChange}>
+                            <select className="form-input" name="position" onChange={this.setValue.bind(this)}>
                                 <option value="gk">GK</option>
                                 <option value="def">DEF</option>
                                 <option value="mid">MID</option>
@@ -77,15 +56,15 @@ class PlayerForm extends React.Component {
                         </div>
                         <div className="form-group">
                             <label className="form-label">Minutes Played</label>
-                            <input className="form-input" type="range" max="90" onChange={this.handleMinsChange} />
+                            <input className="form-input" type="range" max="90" name="mins" onChange={this.setValue.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Goals</label>
-                            <input className="form-input" type="number" onChange={this.handleGoalsChange} />
+                            <input className="form-input" type="number" name="goals" onChange={this.setValue.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Assists</label>
-                            <input className="form-input" type="number" onChange={this.handleAssistsChange} />
+                            <input className="form-input" type="number" name="assists" onChange={this.setValue.bind(this)} />
                         </div>
                         <input className="btn" type="submit" value="Submit" />
                     </form>
