@@ -118,6 +118,10 @@ form {
     padding: 0.5rem;
     width: 100%;
     transition: transform 0.2s ease;
+}
+
+.form-input[type=text],
+.form-input[type=number] {
     &:focus {
         transform: scale(1.025);
     }
