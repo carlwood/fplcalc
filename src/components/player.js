@@ -106,9 +106,18 @@ class PlayerResult extends React.Component {
                 <div><b>{this.props.mins}</b> minutes played ({minsPoints})</div>
                 <div><b>{this.props.goals}</b> goals ({this.renderGoalPoints()})</div>
                 <div><b>{this.props.assists}</b> assist ({this.renderAssistPoints()})</div>
-                <span className="player-points">17</span>
+                <TotalPoints />
                 <span className="player-points-label">points</span>
             </div>
+        )
+    }
+}
+
+class TotalPoints extends React.Component {
+    render() {
+        const total = 0;
+        return (
+            <span className="player-points">{total}</span>
         )
     }
 }
