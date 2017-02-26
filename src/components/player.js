@@ -25,14 +25,17 @@ class PlayerForm extends React.Component {
         this.state = {
             name: '',
             mins: 0,
-            goals: '',
-            assists: '',
-            position: 'gk'
+            goals: 0,
+            assists: 0,
+            position: 'gk',
+            total: 0,
+            points: {}
         }
     }
 
     setValue(event) {
         this.setState({[event.target.name]: event.target.value});
+        console.log(this.state);
     }
 
     render() {
@@ -43,7 +46,7 @@ class PlayerForm extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label className="form-label">Player name</label>
-                            <input className="form-input" type="text" name="name" onChange={this.setValue.bind(this)} />
+                            <input className="form-input" type="text" placeholder="e.g. Costa" name="name" onChange={this.setValue.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Position</label>
@@ -56,15 +59,52 @@ class PlayerForm extends React.Component {
                         </div>
                         <div className="form-group">
                             <label className="form-label">Minutes Played</label>
-                            <input className="form-input" type="range" max="90" name="mins" onChange={this.setValue.bind(this)} />
+                            <div className="form-radio">
+                                <input type="radio" name="mins" value="< 60" onChange={this.setValue.bind(this)} />
+                                <label>&lt; 60</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="radio" name="mins" value="> 60" onChange={this.setValue.bind(this)}/>
+                                <label>&gt; 60</label>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label className="form-label">Goals</label>
-                            <input className="form-input" type="number" name="goals" onChange={this.setValue.bind(this)} />
+                            <div className="form-radio">
+                                <input type="radio" name="goals" value="1" onChange={this.setValue.bind(this)} />
+                                <label>1</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="radio" name="goals" value="2" onChange={this.setValue.bind(this)}/>
+                                <label>2</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="radio" name="goals" value="3" onChange={this.setValue.bind(this)} />
+                                <label>3</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="radio" name="goals" value="4" onChange={this.setValue.bind(this)}/>
+                                <label>4</label>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label className="form-label">Assists</label>
-                            <input className="form-input" type="number" name="assists" onChange={this.setValue.bind(this)} />
+                            <div className="form-radio">
+                                <input type="radio" name="assists" value="1" onChange={this.setValue.bind(this)} />
+                                <label>1</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="radio" name="assists" value="2" onChange={this.setValue.bind(this)}/>
+                                <label>2</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="radio" name="assists" value="3" onChange={this.setValue.bind(this)} />
+                                <label>3</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="radio" name="assists" value="4" onChange={this.setValue.bind(this)}/>
+                                <label>4</label>
+                            </div>
                         </div>
                         <input className="btn" type="submit" value="Submit" />
                     </form>
@@ -76,6 +116,7 @@ class PlayerForm extends React.Component {
                         mins={this.state.mins}
                         goals={this.state.goals} 
                         assists={this.state.assists}
+                        total={this.state.total}
                     />
                 </div>
             </div>
@@ -87,23 +128,24 @@ class PlayerResult extends React.Component {
 
     renderGoalPoints() {
         return (
-            <span>{this.props.goals * 5}</span>
+            <span className="player-minipoints">{this.props.goals * 5}</span>
         )
     }
 
     renderAssistPoints() {
         return (
-            <span>{this.props.assists * 4}</span>
+            <span className="player-minipoints">{this.props.assists * 4}</span>
         )
     }
 
     render() {
-        const minsPoints = this.props.mins > 60 ? 2 : 1;
+        const minsPlayed = this.props.mins === '> 60' ? 'Full match' : 'Partial match';
+        const minsPoints = this.props.mins === '> 60' ? 2 : 1;
         return (
             <div>
                 <div className="player-name">{this.props.name}</div>
                 <div>{this.props.pos}</div>
-                <div><b>{this.props.mins}</b> minutes played ({minsPoints})</div>
+                <div><b>{minsPlayed}</b> ({minsPoints})</div>
                 <div><b>{this.props.goals}</b> goals ({this.renderGoalPoints()})</div>
                 <div><b>{this.props.assists}</b> assist ({this.renderAssistPoints()})</div>
                 <TotalPoints />
