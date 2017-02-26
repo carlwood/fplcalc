@@ -137,6 +137,7 @@ class PlayerResult extends React.Component {
         return (
             <span className="player-minipoints">{this.props.goals * 5}</span>
         )
+        
     }
 
     renderAssistPoints() {
@@ -154,7 +155,7 @@ class PlayerResult extends React.Component {
                 <div>{this.props.pos}</div>
                 <div><b>{minsPlayed}</b> ({minsPoints})</div>
                 <div><b>{this.props.goals}</b> goals ({this.renderGoalPoints()})</div>
-                <div><b>{this.props.assists}</b> assist ({this.renderAssistPoints()})</div>
+                <div><b>{this.props.assists}</b> assists ({this.renderAssistPoints()})</div>
                 <TotalPoints />
                 <span className="player-points-label">points</span>
             </div>
