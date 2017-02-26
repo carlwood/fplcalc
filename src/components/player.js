@@ -72,6 +72,10 @@ class PlayerForm extends React.Component {
                         <div className="form-group">
                             <label className="form-label">Goals</label>
                             <div className="form-radio">
+                                <input type="radio" name="goals" value="0" id="goals0" onChange={this.setValue.bind(this)} />
+                                <label htmlFor="goals0">0</label>
+                            </div>
+                            <div className="form-radio">
                                 <input type="radio" name="goals" value="1" id="goals1" onChange={this.setValue.bind(this)} />
                                 <label htmlFor="goals1">1</label>
                             </div>
@@ -90,6 +94,10 @@ class PlayerForm extends React.Component {
                         </div>
                         <div className="form-group">
                             <label className="form-label">Assists</label>
+                            <div className="form-radio">
+                                <input type="radio" name="assists" value="0" id="assists0" onChange={this.setValue.bind(this)} />
+                                <label htmlFor="assists0">0</label>
+                            </div>
                             <div className="form-radio">
                                 <input type="radio" name="assists" value="1" id="assists1" onChange={this.setValue.bind(this)} />
                                 <label htmlFor="assists1">1</label>
@@ -110,7 +118,7 @@ class PlayerForm extends React.Component {
                         <div className="form-group">
                             <label className="form-label">Extra</label>
                             <div className="form-radio">
-                                <input type="radio" name="capt" value="0" id="capt" onChange={this.setValue.bind(this)}/>
+                                <input type="checkbox" name="capt" value="0" id="capt" onChange={this.setValue.bind(this)}/>
                                 <label htmlFor="capt">Captain</label>
                             </div>
                         </div>
