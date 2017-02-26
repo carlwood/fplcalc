@@ -35,7 +35,6 @@ class PlayerForm extends React.Component {
 
     setValue(event) {
         this.setState({[event.target.name]: event.target.value});
-        console.log(this.state);
     }
 
     render() {
@@ -44,69 +43,77 @@ class PlayerForm extends React.Component {
                 <div className="card">
                     <PlayerIntro />
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <label className="form-label">Player name</label>
-                            <input className="form-input" type="text" placeholder="e.g. Costa" name="name" onChange={this.setValue.bind(this)} />
-                        </div>
-                        <div className="form-group">
-                            <label className="form-label">Position</label>
-                            <select className="form-input" name="position" onChange={this.setValue.bind(this)}>
-                                <option value="gk">GK</option>
-                                <option value="def">DEF</option>
-                                <option value="mid">MID</option>
-                                <option value="fwd">FWD</option>
-                            </select>
+                        <div className="form-group form-group--cols">
+                            <div className="form-group">
+                                <label className="form-label">Player name</label>
+                                <input className="form-input" type="text" placeholder="e.g. Costa" name="name" onChange={this.setValue.bind(this)} />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Position</label>
+                                <select className="form-input" name="position" onChange={this.setValue.bind(this)}>
+                                    <option value="gk">GK</option>
+                                    <option value="def">DEF</option>
+                                    <option value="mid">MID</option>
+                                    <option value="fwd">FWD</option>
+                                </select>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label className="form-label">Minutes Played</label>
                             <div className="form-radio">
-                                <input type="radio" name="mins" value="< 60" onChange={this.setValue.bind(this)} />
-                                <label>&lt; 60</label>
+                                <input type="radio" name="mins" value="< 60" id="mins1" onChange={this.setValue.bind(this)} />
+                                <label htmlFor="mins1">Up to 60 mins</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="mins" value="> 60" onChange={this.setValue.bind(this)}/>
-                                <label>&gt; 60</label>
+                                <input type="radio" name="mins" value="> 60" id="mins2" onChange={this.setValue.bind(this)}/>
+                                <label htmlFor="mins2">60 + mins</label>
                             </div>
                         </div>
                         <div className="form-group">
                             <label className="form-label">Goals</label>
                             <div className="form-radio">
-                                <input type="radio" name="goals" value="1" onChange={this.setValue.bind(this)} />
-                                <label>1</label>
+                                <input type="radio" name="goals" value="1" id="goals1" onChange={this.setValue.bind(this)} />
+                                <label htmlFor="goals1">1</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="goals" value="2" onChange={this.setValue.bind(this)}/>
-                                <label>2</label>
+                                <input type="radio" name="goals" value="2" id="goals2" onChange={this.setValue.bind(this)}/>
+                                <label htmlFor="goals2">2</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="goals" value="3" onChange={this.setValue.bind(this)} />
-                                <label>3</label>
+                                <input type="radio" name="goals" value="3" id="goals3" onChange={this.setValue.bind(this)} />
+                                <label htmlFor="goals3">3</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="goals" value="4" onChange={this.setValue.bind(this)}/>
-                                <label>4</label>
+                                <input type="radio" name="goals" value="4" id="goals4" onChange={this.setValue.bind(this)}/>
+                                <label htmlFor="goals4">4</label>
                             </div>
                         </div>
                         <div className="form-group">
                             <label className="form-label">Assists</label>
                             <div className="form-radio">
-                                <input type="radio" name="assists" value="1" onChange={this.setValue.bind(this)} />
-                                <label>1</label>
+                                <input type="radio" name="assists" value="1" id="assists1" onChange={this.setValue.bind(this)} />
+                                <label htmlFor="assists1">1</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="assists" value="2" onChange={this.setValue.bind(this)}/>
-                                <label>2</label>
+                                <input type="radio" name="assists" value="2" id="assists2" onChange={this.setValue.bind(this)}/>
+                                <label htmlFor="assists2">2</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="assists" value="3" onChange={this.setValue.bind(this)} />
-                                <label>3</label>
+                                <input type="radio" name="assists" value="3" id="assists3" onChange={this.setValue.bind(this)} />
+                                <label htmlFor="assists3">3</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="assists" value="4" onChange={this.setValue.bind(this)}/>
-                                <label>4</label>
+                                <input type="radio" name="assists" value="4" id="assists4" onChange={this.setValue.bind(this)}/>
+                                <label htmlFor="assists4">4</label>
                             </div>
                         </div>
-                        <input className="btn" type="submit" value="Submit" />
+                        <div className="form-group">
+                            <label className="form-label">Extra</label>
+                            <div className="form-radio">
+                                <input type="radio" name="capt" value="0" id="capt" onChange={this.setValue.bind(this)}/>
+                                <label htmlFor="capt">Captain</label>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div className="player-result">
@@ -114,7 +121,7 @@ class PlayerForm extends React.Component {
                         name={this.state.name}
                         pos={this.state.position}
                         mins={this.state.mins}
-                        goals={this.state.goals} 
+                        goals={this.state.goals}
                         assists={this.state.assists}
                         total={this.state.total}
                     />

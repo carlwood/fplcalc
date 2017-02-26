@@ -103,6 +103,16 @@ form {
     margin: 1.5rem 0;
 }
 
+.form-group--cols {
+    display: flex;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    .form-group {
+        flex: 1;
+        margin: 0 0.5rem;
+    }
+}
+
 .form-label {
     color: #666;
     display: block;
@@ -126,6 +136,37 @@ form {
         transform: scale(1.025);
     }
 }
+
+.form-radio {
+    display: inline-block;
+    + .form-radio {
+        margin-left: 0.5rem;
+    }
+    input {
+        position: absolute;
+        left: -9999px;
+        + label {
+            border: solid 1px #ccc;
+            cursor: pointer;
+            display: block;
+            padding: 0.2rem 1rem;
+            transition: all 0.4s ease;
+            &:hover,
+            &:focus {
+                box-shadow: 0 0 4px rgba(0,0,0,0.2);
+            }
+        }
+        &:checked {
+            + label {
+                background-color: $brand2;
+                border-color: $brand2;
+                color: #fff;
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
 
 // Player result
 
