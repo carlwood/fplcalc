@@ -24,7 +24,7 @@ class PlayerForm extends React.Component {
         super();
         this.state = {
             name: '',
-            position: 'gk',
+            position: '',
             capt: false,
             points: {
                 mins: 0,
@@ -147,7 +147,7 @@ class PlayerForm extends React.Component {
                 <div className="player-result">
                     <PlayerResult
                         name={this.state.name}
-                        pos={this.state.position}
+                        position={this.state.position}
                         mins={this.state.points.mins}
                         goals={this.state.points.goals}
                         assists={this.state.points.assists}
@@ -180,7 +180,7 @@ class MinutePoints extends React.Component {
 
 class AssistPoints extends React.Component {
     render() {
-        const points = this.props.assists * 4;
+        const points = this.props.assists * 3;
         return (
             <div><b>{this.props.assists}</b> assists ({points})</div>
         )
@@ -188,17 +188,29 @@ class AssistPoints extends React.Component {
 }
 
 class GoalPoints extends React.Component {
+
     render() {
-        const points = this.props.goals * 5;
+        const pos = this.props.position;
+        const goals = this.props.goals;
+        let points;
+        if (pos === 'gk' || pos === 'def') {
+            points = goals * 6;
+        }
+        else if (pos == 'mid') {
+            points = goals * 5;
+        }
+        else {
+            points = goals * 4;
+        }
         return (
-            <div><b>{this.props.goals}</b> goals ({points})</div>
+            <div><b>{goals}</b> goals ({points})</div>
         )
     }
 }
 
 class TotalPoints extends React.Component {
     render() {
-        let total = this.props.goals * 5 + this.props.assists * 4 + parseInt(this.props.mins);
+        let total = this.props.goals * 5 + this.props.assists * 3 + parseInt(this.props.mins);
         if (this.props.capt) {
             total = parseInt(total * 2)
         }
@@ -219,7 +231,7 @@ class PlayerResult extends React.Component {
             <div className={captClass}>
                 <div className="player-name">{this.props.name}</div>
                 <MinutePoints mins={this.props.mins} />
-                <GoalPoints goals={this.props.goals} />
+                <GoalPoints goals={this.props.goals} position={this.props.position} />
                 <AssistPoints assists={this.props.assists} />
                 <TotalPoints goals={this.props.goals} assists={this.props.assists} capt={this.props.capt} mins={this.props.mins}/>
             </div>
