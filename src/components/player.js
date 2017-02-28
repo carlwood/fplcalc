@@ -27,7 +27,7 @@ class PlayerForm extends React.Component {
             position: 'gk',
             capt: false,
             points: {
-                mins: '',
+                mins: 0,
                 goals: 0,
                 assists: 0,
                 total: 0
@@ -81,11 +81,11 @@ class PlayerForm extends React.Component {
                         <div className="form-group">
                             <label className="form-label">Minutes Played</label>
                             <div className="form-radio">
-                                <input type="radio" name="mins" value="< 60" id="mins1" onChange={this.setPoints.bind(this)} />
+                                <input type="radio" name="mins" value="1" id="mins1" onChange={this.setPoints.bind(this)} />
                                 <label htmlFor="mins1">Up to 60 mins</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="mins" value="> 60" id="mins2" onChange={this.setPoints.bind(this)} />
+                                <input type="radio" name="mins" value="2" id="mins2" onChange={this.setPoints.bind(this)} />
                                 <label htmlFor="mins2">60 + mins</label>
                             </div>
                         </div>
@@ -160,6 +160,24 @@ class PlayerForm extends React.Component {
     }
 }
 
+class MinutePoints extends React.Component {
+    render() {
+        let minsPlayed = 0;
+        if  (this.props.mins > 1) {
+            minsPlayed = 'Full match'
+        }
+        else if (this.props.mins > 0) {
+            minsPlayed = 'Partial match';
+        }
+        else {
+            minsPlayed = '0 mins played';
+        }
+        return (
+            <div><b>{minsPlayed}</b> ({this.props.mins})</div>
+        )
+    }
+}
+
 class AssistPoints extends React.Component {
     render() {
         const points = this.props.assists * 4;
@@ -180,7 +198,7 @@ class GoalPoints extends React.Component {
 
 class TotalPoints extends React.Component {
     render() {
-        let total = this.props.goals * 5 + this.props.assists * 4;
+        let total = this.props.goals * 5 + this.props.assists * 4 + parseInt(this.props.mins);
         if (this.props.capt) {
             total = parseInt(total * 2)
         }
@@ -196,16 +214,14 @@ class TotalPoints extends React.Component {
 class PlayerResult extends React.Component {
 
     render() {
-        const minsPlayed = this.props.mins === '> 60' ? 'Full match' : 'Partial match';
-        const minsPoints = this.props.mins === '> 60' ? 2 : 1;
         const captClass = this.props.capt ? 'is-captain' : '';
         return (
             <div className={captClass}>
                 <div className="player-name">{this.props.name}</div>
-                <div><b>{minsPlayed}</b> ({minsPoints})</div>
+                <MinutePoints mins={this.props.mins} />
                 <GoalPoints goals={this.props.goals} />
                 <AssistPoints assists={this.props.assists} />
-                <TotalPoints goals={this.props.goals} assists={this.props.assists} capt={this.props.capt}/>
+                <TotalPoints goals={this.props.goals} assists={this.props.assists} capt={this.props.capt} mins={this.props.mins}/>
             </div>
         )
     }
