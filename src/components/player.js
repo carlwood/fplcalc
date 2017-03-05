@@ -25,6 +25,7 @@ class PlayerForm extends React.Component {
         this.state = {
             name: '',
             position: '',
+            goalMultiplier: 0,
             capt: false,
             points: {
                 mins: 0,
@@ -37,6 +38,22 @@ class PlayerForm extends React.Component {
 
     setInfo(event) {
         this.setState({[event.target.name]: event.target.value});
+    }
+
+    setPosition(event) {
+        this.setState({[event.target.name]: event.target.value});
+        let multiplier = 0;
+        if (event.target.value === 'gk' || event.target.value === 'def') {
+            multiplier = 6;
+        }
+        else if (event.target.value == 'mid') {
+            multiplier = 5;
+        }
+        else {
+            multiplier = 4;
+        }
+        this.setState({goalMultiplier: multiplier});
+        console.log(this.state.goalMultiplier);
     }
 
     handleCheck(event) {
@@ -57,24 +74,24 @@ class PlayerForm extends React.Component {
                     <form>
                         <div className="form-group">
                             <label className="form-label">Player name</label>
-                            <input className="form-input" type="text" placeholder="e.g. Costa" name="name" onChange={this.setInfo.bind(this)} />
+                            <input className="form-input" type="text" placeholder="e.g. Costa" name="name" onChange={this.setPosition.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Position</label>
                             <div className="form-radio">
-                                <input type="radio" name="position" value="gk" id="gk" onChange={this.setInfo.bind(this)} />
+                                <input type="radio" name="position" value="gk" id="gk" onChange={this.setPosition.bind(this)} />
                                 <label htmlFor="gk">GK</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="position" value="def" id="def" onChange={this.setInfo.bind(this)} />
+                                <input type="radio" name="position" value="def" id="def" onChange={this.setPosition.bind(this)} />
                                 <label htmlFor="def">DEF</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="position" value="mid" id="mid" onChange={this.setInfo.bind(this)} />
+                                <input type="radio" name="position" value="mid" id="mid" onChange={this.setPosition.bind(this)} />
                                 <label htmlFor="mid">MID</label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" name="position" value="fwd" id="fwd" onChange={this.setInfo.bind(this)} />
+                                <input type="radio" name="position" value="fwd" id="fwd" onChange={this.setPosition.bind(this)} />
                                 <label htmlFor="fwd">FWD</label>
                             </div>
                         </div>
@@ -153,6 +170,7 @@ class PlayerForm extends React.Component {
                         assists={this.state.points.assists}
                         total={this.state.points.total}
                         capt={this.state.capt}
+                        goalMultiplier={this.state.goalMultiplier}
                     />
                 </div>
             </div>
@@ -190,27 +208,16 @@ class AssistPoints extends React.Component {
 class GoalPoints extends React.Component {
 
     render() {
-        const pos = this.props.position;
-        const goals = this.props.goals;
-        let points;
-        if (pos === 'gk' || pos === 'def') {
-            points = goals * 6;
-        }
-        else if (pos == 'mid') {
-            points = goals * 5;
-        }
-        else {
-            points = goals * 4;
-        }
+        const points = this.props.goals * this.props.goalMultiplier;
         return (
-            <div><b>{goals}</b> goals ({points})</div>
+            <div><b>{this.props.goals}</b> goals ({points})</div>
         )
     }
 }
 
 class TotalPoints extends React.Component {
     render() {
-        let total = this.props.goals * 5 + this.props.assists * 3 + parseInt(this.props.mins);
+        let total = this.props.goals * this.props.goalMultiplier + this.props.assists * 3 + parseInt(this.props.mins);
         if (this.props.capt) {
             total = parseInt(total * 2)
         }
@@ -231,9 +238,9 @@ class PlayerResult extends React.Component {
             <div className={captClass}>
                 <div className="player-name">{this.props.name}</div>
                 <MinutePoints mins={this.props.mins} />
-                <GoalPoints goals={this.props.goals} position={this.props.position} />
+                <GoalPoints goals={this.props.goals} position={this.props.position} goalMultiplier={this.props.goalMultiplier}/>
                 <AssistPoints assists={this.props.assists} />
-                <TotalPoints goals={this.props.goals} assists={this.props.assists} capt={this.props.capt} mins={this.props.mins}/>
+                <TotalPoints goals={this.props.goals} assists={this.props.assists} capt={this.props.capt} mins={this.props.mins} goalMultiplier={this.props.goalMultiplier}/>
             </div>
         )
     }
