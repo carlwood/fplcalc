@@ -12,7 +12,7 @@ class PlayerIntro extends React.Component {
     render() {
         return (
             <div className="form-intro">
-                <p>Calculate your player's potential points by completing this form.</p>
+                <p>Calculate your player points by completing this form.</p>
             </div>
         )
     }
