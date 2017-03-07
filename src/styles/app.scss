@@ -4,6 +4,8 @@
 
 $brand1: #a5467b;
 $brand2: #ff8c16;
+$yellow: #ffdf43;
+$red:    red;
 
 * {
     box-sizing: border-box;
@@ -220,4 +222,30 @@ form {
 .player-points-label {
     color: #aaa;
     text-align: center;
+}
+
+.player-cards {
+    position: absolute;
+    top: 1.5rem;
+    right: 0rem;
+}
+
+    .player__card {
+        display: inline-block;
+        transform: rotate(12deg);
+        width: 12px;
+        height: 16px;
+        + .player__card {
+            margin-left: 5px;
+        }
+        &.is-yellow {
+            background: $yellow;
+        }
+        &.is-red {
+            background: $red;
+        }
+    }
+
+.u-rel {
+    position: relative;
 }

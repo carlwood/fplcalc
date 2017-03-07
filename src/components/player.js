@@ -225,6 +225,36 @@ class GoalPoints extends React.Component {
     }
 }
 
+class Cards extends React.Component {
+    render() {
+        if (this.props.yellow && this.props.red) {
+            return (
+                <div className="player-cards">
+                    <div className="player__card is-yellow"></div>
+                    <div className="player__card is-red"></div>
+                </div>
+            )
+        }
+        else if (this.props.yellow) {
+            return (
+                <div className="player-cards">
+                    <div className="player__card is-yellow"></div>
+                </div>
+            )
+        }
+        else if (this.props.red) {
+            return (
+                <div className="player-cards">
+                    <div className="player__card is-red"></div>
+                </div>
+            )
+        }
+        else {
+            return null;
+        }
+    }
+}
+
 class TotalPoints extends React.Component {
     render() {
 
@@ -255,8 +285,9 @@ class PlayerResult extends React.Component {
     render() {
         const captClass = this.props.capt ? 'is-captain' : '';
         return (
-            <div className={captClass}>
+            <div className={'u-rel ' + captClass}>
                 <div className="player-name">{this.props.name}</div>
+                <Cards yellow={this.props.yellow} red={this.props.red} />
                 <MinutePoints mins={this.props.mins} />
                 <GoalPoints goals={this.props.goals} position={this.props.position} goalMultiplier={this.props.goalMultiplier}/>
                 <AssistPoints assists={this.props.assists} />
