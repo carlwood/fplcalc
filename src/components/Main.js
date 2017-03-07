@@ -2,7 +2,7 @@ require('normalize.css/normalize.css');
 require('styles/app.scss');
 
 import React from 'react';
-import Player from './player';
+import Player from './Player';
 
 class AppComponent extends React.Component {
     render() {
