@@ -27,6 +27,8 @@ class PlayerForm extends React.Component {
             position: '',
             goalMultiplier: 0,
             capt: false,
+            yellowCard: false,
+            redCard: false,
             points: {
                 mins: 0,
                 goals: 0,
@@ -53,11 +55,10 @@ class PlayerForm extends React.Component {
             multiplier = 4;
         }
         this.setState({goalMultiplier: multiplier});
-        console.log(this.state.goalMultiplier);
     }
 
     handleCheck(event) {
-        this.setState({capt: event.target.checked});
+        this.setState({[event.target.name]: event.target.checked});
     }
 
     setPoints(event) {
@@ -158,6 +159,14 @@ class PlayerForm extends React.Component {
                                 <input type="checkbox" name="capt" id="capt" checked={this.state.checked} onClick={this.handleCheck.bind(this)} />
                                 <label htmlFor="capt">Captain</label>
                             </div>
+                            <div className="form-radio">
+                                <input type="checkbox" name="yellow" id="yellow" checked={this.state.checked} onClick={this.handleCheck.bind(this)} />
+                                <label htmlFor="yellow">Yellow card</label>
+                            </div>
+                            <div className="form-radio">
+                                <input type="checkbox" name="red" id="red" checked={this.state.checked} onClick={this.handleCheck.bind(this)} />
+                                <label htmlFor="red">Red card</label>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -170,6 +179,8 @@ class PlayerForm extends React.Component {
                         assists={this.state.points.assists}
                         total={this.state.points.total}
                         capt={this.state.capt}
+                        yellow={this.state.yellow}
+                        red={this.state.red}
                         goalMultiplier={this.state.goalMultiplier}
                     />
                 </div>
@@ -206,7 +217,6 @@ class AssistPoints extends React.Component {
 }
 
 class GoalPoints extends React.Component {
-
     render() {
         const points = this.props.goals * this.props.goalMultiplier;
         return (
@@ -217,7 +227,17 @@ class GoalPoints extends React.Component {
 
 class TotalPoints extends React.Component {
     render() {
-        let total = this.props.goals * this.props.goalMultiplier + this.props.assists * 3 + parseInt(this.props.mins);
+
+        // Calculate yellow/red card points to add to total
+        let cardPoints = 0;
+        if (this.props.yellow) {
+            cardPoints = cardPoints - 1;
+        }
+        if (this.props.red) {
+            cardPoints = cardPoints - 3;
+        }
+  
+        let total = this.props.goals * this.props.goalMultiplier + this.props.assists * 3 + parseInt(this.props.mins) + cardPoints;
         if (this.props.capt) {
             total = parseInt(total * 2)
         }
@@ -240,7 +260,15 @@ class PlayerResult extends React.Component {
                 <MinutePoints mins={this.props.mins} />
                 <GoalPoints goals={this.props.goals} position={this.props.position} goalMultiplier={this.props.goalMultiplier}/>
                 <AssistPoints assists={this.props.assists} />
-                <TotalPoints goals={this.props.goals} assists={this.props.assists} capt={this.props.capt} mins={this.props.mins} goalMultiplier={this.props.goalMultiplier}/>
+                <TotalPoints 
+                    goals={this.props.goals}
+                    assists={this.props.assists}
+                    capt={this.props.capt}
+                    yellow={this.props.yellow}
+                    red={this.props.red}
+                    mins={this.props.mins}
+                    goalMultiplier={this.props.goalMultiplier}
+                />
             </div>
         )
     }
