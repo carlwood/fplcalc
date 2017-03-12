@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Radio from './Radio';
+import Checkbox from './Checkbox';
 
 class Player extends React.Component {
     render() {
@@ -26,7 +27,7 @@ class PlayerForm extends React.Component {
         this.state = {
             name: '',
             position: '',
-            goalMultiplier: 0,
+            goalMultiplier: 4,
             capt: false,
             yellowCard: false,
             redCard: false,
@@ -45,7 +46,7 @@ class PlayerForm extends React.Component {
 
     setPosition(event) {
         this.setState({[event.target.name]: event.target.value});
-        let multiplier = 0;
+        let multiplier;
         if (event.target.value === 'gk' || event.target.value === 'def') {
             multiplier = 6;
         }
@@ -80,94 +81,37 @@ class PlayerForm extends React.Component {
                         </div>
                         <div className="form-group">
                             <label className="form-label">Position</label>
-                            <div className="form-radio">
-                                <input type="radio" name="position" value="gk" id="gk" onChange={this.setPosition.bind(this)} />
-                                <label htmlFor="gk">GK</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="position" value="def" id="def" onChange={this.setPosition.bind(this)} />
-                                <label htmlFor="def">DEF</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="position" value="mid" id="mid" onChange={this.setPosition.bind(this)} />
-                                <label htmlFor="mid">MID</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="position" value="fwd" id="fwd" onChange={this.setPosition.bind(this)} />
-                                <label htmlFor="fwd">FWD</label>
-                            </div>
+                            <Radio label="GK" value="gk" name="position" handleChange={this.setPosition.bind(this)} />
+                            <Radio label="DEF" value="def" name="position" handleChange={this.setPosition.bind(this)} />
+                            <Radio label="MID" value="mid" name="position" handleChange={this.setPosition.bind(this)} />
+                            <Radio label="FWD" value="fwd" name="position" handleChange={this.setPosition.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Minutes Played</label>
-                            <div className="form-radio">
-                                <input type="radio" name="mins" value="1" id="mins1" onChange={this.setPoints.bind(this)} />
-                                <label htmlFor="mins1">Up to 60 mins</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="mins" value="2" id="mins2" onChange={this.setPoints.bind(this)} />
-                                <label htmlFor="mins2">60 + mins</label>
-                            </div>
+                            <Radio label="Up to 60 mins" value="1" name="mins" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="Over 60 mins" value="2" name="mins" handleChange={this.setPoints.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Goals</label>
-                            <div className="form-radio">
-                                <input type="radio" name="goals" value="0" id="goals0" onChange={this.setPoints.bind(this)}  />
-                                <label htmlFor="goals0">0</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="goals" value="1" id="goals1" onChange={this.setPoints.bind(this)} />
-                                <label htmlFor="goals1">1</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="goals" value="2" id="goals2" onChange={this.setPoints.bind(this)}/>
-                                <label htmlFor="goals2">2</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="goals" value="3" id="goals3" onChange={this.setPoints.bind(this)} />
-                                <label htmlFor="goals3">3</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="goals" value="4" id="goals4" onChange={this.setPoints.bind(this)}/>
-                                <label htmlFor="goals4">4</label>
-                            </div>
+                            <Radio label="0" value="0" name="goals" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="1" value="1" name="goals" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="2" value="2" name="goals" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="3" value="3" name="goals" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="4" value="4" name="goals" handleChange={this.setPoints.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Assists</label>
-                            <div className="form-radio">
-                                <input type="radio" name="assists" value="0" id="assists0" onChange={this.setPoints.bind(this)} />
-                                <label htmlFor="assists0">0</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="assists" value="1" id="assists1" onChange={this.setPoints.bind(this)} />
-                                <label htmlFor="assists1">1</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="assists" value="2" id="assists2" onChange={this.setPoints.bind(this)}/>
-                                <label htmlFor="assists2">2</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="assists" value="3" id="assists3" onChange={this.setPoints.bind(this)} />
-                                <label htmlFor="assists3">3</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="radio" name="assists" value="4" id="assists4" onChange={this.setPoints.bind(this)}/>
-                                <label htmlFor="assists4">4</label>
-                            </div>
+                            <Radio label="0" value="0" name="assists" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="1" value="1" name="assists" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="2" value="2" name="assists" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="3" value="3" name="assists" handleChange={this.setPoints.bind(this)} />
+                            <Radio label="4" value="4" name="assists" handleChange={this.setPoints.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="form-label">Extra</label>
-                            <div className="form-radio">
-                                <input type="checkbox" name="capt" id="capt" checked={this.state.checked} onClick={this.handleCheck.bind(this)} />
-                                <label htmlFor="capt">Captain</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="checkbox" name="yellow" id="yellow" checked={this.state.checked} onClick={this.handleCheck.bind(this)} />
-                                <label htmlFor="yellow">Yellow card</label>
-                            </div>
-                            <div className="form-radio">
-                                <input type="checkbox" name="red" id="red" checked={this.state.checked} onClick={this.handleCheck.bind(this)} />
-                                <label htmlFor="red">Red card</label>
-                            </div>
+                            <Checkbox label="Captain" name="capt" handleChange={this.handleCheck.bind(this)} checkStatus={this.state.checked}/>
+                            <Checkbox label="Yellow card" name="yellow" handleChange={this.handleCheck.bind(this)} checkStatus={this.state.checked}/>
+                            <Checkbox label="Red card" name="red" handleChange={this.handleCheck.bind(this)} checkStatus={this.state.checked}/>
                         </div>
                     </form>
                 </div>
